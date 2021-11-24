@@ -15,6 +15,11 @@ class CreateCursosTable extends Migration
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
+            $table->string('titulo', 150);
+            $table->string('descripcion');
+            $table->string('foto');
+            $table->foreign('cursos_usuario_id')->references('id')->on('cursos_usuario');
+            $table->foreign('cursos_videos_id')->references('id')->on('cursos_videos');
             $table->timestamps();
         });
     }
