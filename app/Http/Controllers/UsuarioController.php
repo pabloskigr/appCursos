@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Usuario;
 
 class UsuarioController extends Controller
 
 
-use Illuminate\Http\Request;
-use App\Models\Usuario;
+
+
 
 {
     //
@@ -30,6 +31,8 @@ use App\Models\Usuario;
         $Usuario->foto = $datos->foto;
         $Usuario->email = $datos->email;
         $Usuario->contraseña = $datos->contraseña;
+        $Usuario->activo = $datos->activo = 1;
+        
 
 
         if(isset($datos->email))
@@ -48,7 +51,7 @@ use App\Models\Usuario;
     }
 
 
-    public function borrar($id){
+    public function desactivar($id){
 
         $respuesta = ["status" => 1, "msg" => ""];
 
@@ -56,11 +59,15 @@ use App\Models\Usuario;
         try{
             $Usuario = Usuario::find($id);
 
-            if($Usuario){
-                    $Usuario->delete();
-                    $respuesta['msg'] = "Usuario borrada";
+
+            if($Usuario->activo = 1){
+                    $respuesta['msg'] = "Usuario desactivado";
+                    $Usuario->activo = 0;
+                    $Usuario->save();
+            }else if ($Usuario->activo == 0){
+                $respuesta["msg"] = "Usuario ya esta desactivadod";
             }else{
-                $respuesta["msg"] = "Usuario no encontrada";
+                $respuesta["msg"] = "Usuario ya esta desactivadod";
                 $respuesta["status"] = 0;
             }
         }catch(\Exception $e){
@@ -87,7 +94,7 @@ use App\Models\Usuario;
         try{
             $Usuario = Usuario::find($id);
 
-            if($Usuario){
+            if($Usuario ){
 
                 //VALIDAR LOS DATOS
 
