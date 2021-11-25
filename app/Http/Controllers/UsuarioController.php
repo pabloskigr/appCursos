@@ -6,11 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 
 class UsuarioController extends Controller
-
-
-
-
-
 {
     //
     public function crear(Request $req){
@@ -88,8 +83,6 @@ class UsuarioController extends Controller
         //VALIDAR EL JSON
 
         $datos = json_decode($datos); //Se interpreta como objeto. Se puede pasar un parámetro para que en su lugar lo devuelva como array.
-
-
         //Buscar a la Usuario
         try{
             $Usuario = Usuario::find($id);
@@ -100,12 +93,11 @@ class UsuarioController extends Controller
 
                 if(isset($datos->nombre))
                     $Usuario->nombre = $datos->nombre;
-                if(isset($datos->telefono))
-                    $Usuario->telefono = $datos->telefono;
-                if(isset($datos->direccion))
-                    $Usuario->direccion = $datos->direccion;
-                if(isset($datos->email))
-                    $Usuario->email = $datos->email;
+                if(isset($datos->foto))
+                    $Usuario->foto = $datos->foto;
+                if(isset($datos->contraseña))
+                    $Usuario->contraseña = $datos->contraseña;
+                
 
                 //Escribir en la base de datos
                     $Usuario->save();

@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\CursosController;
+use App\Http\Controllers\VideoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +24,18 @@ Route::prefix('usuario')->group(function(){
 	Route::post('/editar/{id}',[UsuarioController::class, 'editar']);
 	Route::get('/ver/{id}',[UsuarioController::class, 'ver']);
 	Route::get('/lista',[UsuarioController::class, 'lista']);
+});
+Route::prefix('cursos')->group(function(){
+	Route::put('/crear',[CursosController::class, 'crear']);
+	//Route::post('/desactivar/{id}',[CursosController::class, 'desactivar']);
+	Route::post('/editar/{id}',[CursosController::class, 'editar']);
+	Route::get('/ver/{id}',[CursosController::class, 'ver']);
+	Route::get('/lista',[CursosController::class, 'lista']);
+});
+Route::prefix('video')->group(function(){
+	Route::put('/crear',[VideoController::class, 'crear']);
+	//Route::post('/desactivar/{id}',[VideoController::class, 'desactivar']);
+	Route::post('/editar/{id}',[VideoController::class, 'editar']);
+	Route::get('/ver/{id}',[VideoController::class, 'ver']);
+	Route::get('/lista',[VideoController::class, 'lista']);
 });
