@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Videos;
+use App\Models\Video;
 
 class VideoController extends Controller
 {
@@ -20,7 +20,7 @@ class VideoController extends Controller
 
         //VALIDAR LOS DATOS
 
-        $Videos = new Videos();
+        $Videos = new Video();
 
         $Videos->titulo = $datos->titulo;
         $Videos->fotoPortada = $datos->fotoPortada;
@@ -42,38 +42,12 @@ class VideoController extends Controller
 
         return response()->json($respuesta);
     }
-    // public function desactivar($id){
-
-    //     $respuesta = ["status" => 1, "msg" => ""];
-
-    //     //Buscar a la Usuario
-    //     try{
-    //         $Usuario = Usuario::find($id);
-
-
-    //         if($Usuario->activo = 1){
-    //                 $respuesta['msg'] = "Usuario desactivado";
-    //                 $Usuario->activo = 0;
-    //                 $Usuario->save();
-    //         }else if ($Usuario->activo == 0){
-    //             $respuesta["msg"] = "Usuario ya esta desactivadod";
-    //         }else{
-    //             $respuesta["msg"] = "Usuario ya esta desactivadod";
-    //             $respuesta["status"] = 0;
-    //         }
-    //     }catch(\Exception $e){
-    //         $respuesta['status'] = 0;
-    //         $respuesta['msg'] = "Se ha producido un error: ".$e->getMessage();
-    //     }
-
-    //     return response()->json($respuesta);
-    // }
 
     public function listar(){
 
         $respuesta = ["status" => 1, "msg" => ""];
         try{
-            $personas = Videos::all();
+            $personas = Video::all();
             $respuesta['datos'] = $personas;
         }catch(\Exception $e){
             $respuesta['status'] = 0;
@@ -88,7 +62,7 @@ class VideoController extends Controller
 
         //Buscar a la Videos
         try{
-            $Videos = Videos::find($id);
+            $Videos = Video::find($id);
             $Videos->makeVisible(['direccion','updated_at']);
             $respuesta['datos'] = $Videos;
         }catch(\Exception $e){

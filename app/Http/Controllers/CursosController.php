@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cursos;
+use App\Models\Curso;
+use Illuminate\Support\Facades\DB;
 
 class CursosController extends Controller
 {
@@ -20,7 +21,7 @@ class CursosController extends Controller
 
         //VALIDAR LOS DATOS
 
-        $Cursos = new Cursos();
+        $Cursos = new Curso();
 
         $Cursos->titulo = $datos->titulo;
         $Cursos->foto = $datos->foto;
@@ -40,12 +41,24 @@ class CursosController extends Controller
     }
 
 
-    public function listar(){
+    public function lista(Request $req){
 
         $respuesta = ["status" => 1, "msg" => ""];
+        $datos = $req->getContent();
+
+        $datos = json_decode($datos);
         try{
-            $personas = Cursos::all();
-            $respuesta['datos'] = $personas;
+            $Cursos = DB::table('Cursos');
+        if($req->has('titulo')){
+            $Cursos = Curso::withCount('video as cantidad')
+            ->where('titulo','like','%'.$req->input('titulo').'%')
+            ->get();
+            $respuesta['datos'] = $Cursos;
+        }else{
+            $Cursos = Curso::withCount('video as cantidad')->get();
+            $respuesta['datos'] = $Cursos;
+        }
+            
         }catch(\Exception $e){
             $respuesta['status'] = 0;
             $respuesta['msg'] = "Se ha producido un error: ".$e->getMessage();
