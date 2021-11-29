@@ -13,11 +13,13 @@ class CreateCursosTable extends Migration
      */
     public function up()
     {
+       
         Schema::create('cursos', function (Blueprint $table) {
-            $table->id();
+            $table->id('id');
             $table->string('titulo', 150);
             $table->string('descripcion');
             $table->string('foto');
+
             $table->timestamps();
         });
     }

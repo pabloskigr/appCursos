@@ -46,32 +46,32 @@ class UsuarioController extends Controller
     }
 
 
-    public function desactivar($id){
+        public function desactivar($id){
 
-        $respuesta = ["status" => 1, "msg" => ""];
+            $respuesta = ["status" => 1, "msg" => ""];
 
-        //Buscar a la Usuario
-        try{
-            $Usuario = Usuario::find($id);
+            //Buscar a la Usuario
+            try{
+                $Usuario = Usuario::find($id);
 
 
-            if($Usuario->activo = 1){
-                    $respuesta['msg'] = "Usuario desactivado";
-                    $Usuario->activo = 0;
-                    $Usuario->save();
-            }else if ($Usuario->activo == 0){
-                $respuesta["msg"] = "Usuario ya esta desactivadod";
-            }else{
-                $respuesta["msg"] = "Usuario ya esta desactivadod";
-                $respuesta["status"] = 0;
+                if($Usuario->activo = 1){
+                        $respuesta['msg'] = "Usuario desactivado";
+                        $Usuario->activo = 0;
+                        $Usuario->save();
+                }else if ($Usuario->activo == 0){
+                    $respuesta["msg"] = "Usuario ya esta desactivadod";
+                }else{
+                    $respuesta["msg"] = "Usuario ya esta desactivadod";
+                    $respuesta["status"] = 0;
+                }
+            }catch(\Exception $e){
+                $respuesta['status'] = 0;
+                $respuesta['msg'] = "Se ha producido un error: ".$e->getMessage();
             }
-        }catch(\Exception $e){
-            $respuesta['status'] = 0;
-            $respuesta['msg'] = "Se ha producido un error: ".$e->getMessage();
-        }
 
-        return response()->json($respuesta);
-    }
+            return response()->json($respuesta);
+        }
 
 
     public function editar(Request $req,$id){
@@ -118,8 +118,8 @@ class UsuarioController extends Controller
 
         $respuesta = ["status" => 1, "msg" => ""];
         try{
-            $personas = Usuario::all();
-            $respuesta['datos'] = $personas;
+            $Usuario = Usuario::all();
+            $respuesta['datos'] = $Usuario;
         }catch(\Exception $e){
             $respuesta['status'] = 0;
             $respuesta['msg'] = "Se ha producido un error: ".$e->getMessage();

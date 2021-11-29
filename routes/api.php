@@ -29,7 +29,7 @@ Route::prefix('cursos')->group(function(){
 	Route::put('/crear',[CursosController::class, 'crear']);
 	//Route::post('/desactivar/{id}',[CursosController::class, 'desactivar']);
 	Route::post('/editar/{id}',[CursosController::class, 'editar']);
-	Route::get('/ver/{id}',[CursosController::class, 'ver']);
+	Route::get('/asociar/{id}',[CursosController::class, 'asociar']);
 	Route::get('/lista',[CursosController::class, 'lista']);
 });
 Route::prefix('video')->group(function(){
