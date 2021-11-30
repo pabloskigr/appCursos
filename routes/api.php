@@ -27,15 +27,11 @@ Route::prefix('usuario')->group(function(){
 });
 Route::prefix('cursos')->group(function(){
 	Route::put('/crear',[CursosController::class, 'crear']);
-	//Route::post('/desactivar/{id}',[CursosController::class, 'desactivar']);
 	Route::post('/editar/{id}',[CursosController::class, 'editar']);
-	Route::get('/asociar/{id}',[CursosController::class, 'asociar']);
 	Route::get('/lista',[CursosController::class, 'lista']);
 });
 Route::prefix('video')->group(function(){
 	Route::put('/crear',[VideoController::class, 'crear']);
-	//Route::post('/desactivar/{id}',[VideoController::class, 'desactivar']);
-	Route::post('/editar/{id}',[VideoController::class, 'editar']);
 	Route::get('/ver/{id}',[VideoController::class, 'ver']);
 	Route::get('/lista',[VideoController::class, 'lista']);
 });
