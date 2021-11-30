@@ -36,7 +36,7 @@ class UsuarioController extends Controller
         //Escribir en la base de datos
         try{
             if(Usuario::where('email', '=',$datos->email)->first()){
-                $respuesta['msg'] = "El email ya existe, pruebe con otro"
+                $respuesta['msg'] = "El email ya existe, pruebe con otro";
             }else{
                 $Usuario->save();
                 $respuesta['msg'] = "Usuario guardada con id ".$Usuario->id;
