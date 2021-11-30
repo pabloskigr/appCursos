@@ -27,7 +27,6 @@ Route::prefix('usuario')->group(function(){
 });
 Route::prefix('cursos')->group(function(){
 	Route::put('/crear',[CursosController::class, 'crear']);
-	Route::post('/editar/{id}',[CursosController::class, 'editar']);
 	Route::get('/lista',[CursosController::class, 'lista']);
 });
 Route::prefix('video')->group(function(){
